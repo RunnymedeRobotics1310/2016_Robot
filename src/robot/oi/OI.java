@@ -8,6 +8,7 @@ import robot.Field.Lane;
 import robot.Field.Slot;
 import robot.RobotMap;
 import robot.commands.auto.AutoDriveAndShootCommand;
+import robot.commands.auto.base.DriveToUltraDistance;
 import robot.utils.R_Extreme3DPro_GameController;
 import robot.utils.R_GameController;
 import robot.utils.R_GameController.Axis;
@@ -29,7 +30,7 @@ public class OI {
 		//Operator Controls
 		SHOOT_BOULDER(Button.BUTTON1),
 		WIND_UP_SHOOTER(Button.BUTTON2), 
-		CLIMB(Button.BUTTON7),
+		//CLIMB(Button.BUTTON7),
 		PORTCULLIS_OPEN(Button.BUTTON5),
 		ARM_PID_OVERRIDE(Button.BUTTON6),
 		ROTATE_ARM_MIN_POS(Button.BUTTON9),
@@ -163,7 +164,8 @@ public class OI {
 	}
 	
 	public boolean getClimbButton() {
-		return operatorStick.getButton(ButtonMap.CLIMB.getButton());
+		//return operatorStick.getButton(ButtonMap.CLIMB.getButton());
+		return false;
 	}
 	
 	public double getSpeed() {
@@ -207,11 +209,14 @@ public class OI {
 	
 	public Command getAutoCommand() {
 
+		// Main Auto Mode
 		switch (autoChooser.getAutoMode()) {
 		case "Do Nothing":
 			return null;
 		case "Drive and Shoot":
 			return new AutoDriveAndShootCommand(getSlot(), getDefense(), getLane(), getGoal());
+		case "Drive to 70":
+			return new DriveToUltraDistance(0.5, 0, 70);
 		default:
 			return null;
 		}

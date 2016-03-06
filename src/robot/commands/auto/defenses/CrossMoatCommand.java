@@ -12,6 +12,6 @@ public class CrossMoatCommand extends CommandGroup {
 	public CrossMoatCommand() {
 		addSequential(new SetArmLevelCommand(ArmLevel.DRIVE_LEVEL));
 		addSequential(new ShiftGearCommand(Gear.HIGH));
-		addSequential(new DriveToDistance(1.0, 0, 60));
+		addSequential(new DriveToDistance(1.0, 0, 150));
 	}
 }

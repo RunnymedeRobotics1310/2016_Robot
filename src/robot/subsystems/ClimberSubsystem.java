@@ -58,9 +58,9 @@ public class ClimberSubsystem extends R_Subsystem {
 
 	@Override
 	public void updateDashboard() {
-		SmartDashboard.putData("Left Scissor", leftScissorPiston);
+		/*SmartDashboard.putData("Left Scissor", leftScissorPiston);
 		SmartDashboard.putData("Right Scissor", rightScissorPiston);
 		SmartDashboard.putData("Left Winch", leftWinchMotor);
-		SmartDashboard.putData("Right Winch", rightWinchMotor);
+		SmartDashboard.putData("Right Winch", rightWinchMotor);*/
 	}
 }

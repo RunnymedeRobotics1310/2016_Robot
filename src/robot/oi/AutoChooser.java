@@ -17,6 +17,7 @@ public class AutoChooser {
 	public AutoChooser() {
 		autoModeChooser.addDefault("Drive and Shoot", "Drive and Shoot");
 		autoModeChooser.addObject("Do nothing", "Do Nothing");
+		autoModeChooser.addObject("Drive to 70",  "Drive to 70");
 
 		laneChooser.addObject("1", 1);
 		laneChooser.addObject("2", 2);

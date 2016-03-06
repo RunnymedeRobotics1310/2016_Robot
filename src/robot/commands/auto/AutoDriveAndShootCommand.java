@@ -25,6 +25,7 @@ public class AutoDriveAndShootCommand extends CommandGroup {
 	
 	public AutoDriveAndShootCommand(Slot slot, Defense defense, Lane lane, Goal goal) {
 		double waitTime = 4.0;
+		double autoSpeed = 0.8;
 
 		switch (defense) {
 		case LOW_BAR:
@@ -52,7 +53,7 @@ public class AutoDriveAndShootCommand extends CommandGroup {
 
 		// If the far lane is selected, go for another 50 inches.
 		if (lane == Lane.FAR) {
-			addSequential(new DriveToDistance(0.5, 0, 50));
+			addSequential(new DriveToDistance(autoSpeed, 0, 50));
 		}
 
 		// Rotate to 90 degrees, because that's what we always do.
@@ -62,30 +63,31 @@ public class AutoDriveAndShootCommand extends CommandGroup {
 		// wait until the path is clear and then continue.
 		addSequential(new WaitUntilPathClear(waitTime, slot));
 
-		addSequential(new DriveToUltraDistance(0.5, 90, goal.getRequiredDistance()));
+		addSequential(new DriveToUltraDistance(autoSpeed, 90, goal.getRequiredDistance()));
 
 		// Rotate to 0 degrees, because that's what we always do.
 		addSequential(new RotateToAngleCommand(0, waitTime));
 
-		addSequential(new DriveToCenterProximity(0.5, 0));
-
 		if (goal != Goal.CENTER) {
-			addSequential(new DriveToDistance(0.5, 0, -20));
+			addSequential(new DriveToCenterProximity(autoSpeed, 0));
+			addSequential(new DriveToDistance(autoSpeed, 0, -20));
+		} else {
+			addSequential(new DriveToProximity(autoSpeed-0.3, 0));
 		}
 
-		final int rampAngle = 50;
-
+		final int rampAngle = 60;
+		
 		switch (goal) {
 		case LEFT:
 			addSequential(new RotateToAngleCommand(rampAngle, waitTime));
-			addSequential(new DriveToProximity(0.5, rampAngle));
+			addSequential(new DriveToProximity(autoSpeed, rampAngle));
 			break;
 		case CENTER:
 			// do nothing.
 			break;
 		case RIGHT:
 			addSequential(new RotateToAngleCommand(360 - rampAngle, waitTime));
-			addSequential(new DriveToProximity(0.5, 360 - rampAngle));
+			addSequential(new DriveToProximity(autoSpeed, 360 - rampAngle));
 			break;
 		}
 

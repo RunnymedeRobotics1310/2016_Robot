@@ -17,7 +17,7 @@ public class PortcullisOpenCommand extends Command {
 	private double startAngle = 0.0;
 	private Step   step;
 	
-	private double BACKUP_SLOWLY_SPEED = -.04;
+	private double BACKUP_SLOWLY_SPEED = -.05;
 	
 	public PortcullisOpenCommand() {
 		requires(Robot.armSubsystem);
@@ -39,11 +39,14 @@ public class PortcullisOpenCommand extends Command {
 		// backwards slightly.
 		if (step == Step.ONE) {
 			Robot.chassisSubsystem.setSpeed(BACKUP_SLOWLY_SPEED, BACKUP_SLOWLY_SPEED);
-			Robot.armSubsystem.setArmAngle(startAngle + 90);
+			Robot.armSubsystem.setArmAngle(startAngle + 110);
+			
+			if (Robot.chassisSubsystem.getEncoderDistance() < -1.0) {
+				Robot.chassisSubsystem.setSpeed(0.0, 0.0);
+			}
 			
 			if (Robot.armSubsystem.getArmAngle() > startAngle+90) {
 				step = Step.TWO;
-				Robot.chassisSubsystem.setSpeed(0.0, 0.0);
 			}
 			return;
 		}

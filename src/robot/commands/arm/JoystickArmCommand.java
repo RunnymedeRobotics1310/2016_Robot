@@ -18,6 +18,10 @@ public class JoystickArmCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	if (Robot.oi.getCancel()){
+    		Scheduler.getInstance().add(new ArmIntakeReverseCommand());
+    	}
+    	
     	if (Robot.oi.getArmPIDOverride()) {
     		Robot.armSubsystem.disableArmPID();
         	Robot.armSubsystem.setArmSpeed(Robot.oi.getArmSpeed());

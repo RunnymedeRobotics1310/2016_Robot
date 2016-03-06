@@ -34,9 +34,12 @@ public class ArmSubsystem extends R_Subsystem {
 
 		@Override
 		public void pidWrite(double speed) {
+			if (speed >  0.4) { speed =  0.4; }
+			if (speed < -0.4) { speed = -0.4; }
 			armDeployMotor.set(speed);
 		}
 	};
+	
 	R_PIDController armPID = new R_PIDController(2.0, 0.0, 0.0, 0.0, armPIDInput, armPIDOutput);
 
 	private boolean armDeployed = false;
@@ -56,12 +59,12 @@ public class ArmSubsystem extends R_Subsystem {
 
 	@Override
 	public void updateDashboard() {
-		SmartDashboard.putData("Deploy Motor", armDeployMotor);
-		SmartDashboard.putNumber("Arm Encoder Voltage", armEncoder.getVoltage());
+		//SmartDashboard.putData("Deploy Motor", armDeployMotor);
+		//SmartDashboard.putNumber("Arm Encoder Voltage", armEncoder.getVoltage());
 		SmartDashboard.putNumber("Arm Encoder Angle", armEncoder.getAngle());
 		SmartDashboard.putBoolean("Arm Max Height", armMaxHeight.get());
 		SmartDashboard.putBoolean("Arm Min Height", armMinHeight.get());
-		SmartDashboard.putData("Arm PID", armPID);
+		//SmartDashboard.putData("Arm PID", armPID);
 	}
 
 	/**

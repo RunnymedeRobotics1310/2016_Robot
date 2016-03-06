@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 
 public class R_Gyro extends AnalogGyro {
 	
-	public R_Gyro(int port, int gyroCenter) {
-		super(port, gyroCenter, 0.0);
+	public R_Gyro(int port) {
+		super(port);
 	}
 
 	@Override

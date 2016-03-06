@@ -10,13 +10,8 @@ import robot.commands.auto.base.WaitCommand;
 public class CrossPortcullisCommand extends CommandGroup {
 
 	public CrossPortcullisCommand() {
-		addSequential(new SetArmLevelCommand(ArmLevel.DRIVE_LEVEL));
-		addSequential(new DriveToProximity(0.5, 0));
-		addSequential(new SetArmLevelCommand(ArmLevel.GROUND_LEVEL));
-		addSequential(new WaitCommand(1.0));
-		addSequential(new DriveToDistance(1.0, 0, 15));
-		addParallel(new SetArmLevelCommand(ArmLevel.DRIVE_LEVEL));
-		addSequential(new WaitCommand(1.0));
-		addSequential(new DriveToDistance(1.0, 0, 60));
+		addSequential(new SetArmLevelCommand(ArmLevel.LOW_LEVEL));
+		addSequential(new DriveToProximity(0.6, 0));
+		addSequential(new DriveToDistance(1.0, 0, 100));
 	}
 }

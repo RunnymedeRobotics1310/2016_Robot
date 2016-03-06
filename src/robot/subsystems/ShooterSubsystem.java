@@ -173,8 +173,8 @@ public class ShooterSubsystem extends R_Subsystem {
 
 	@Override
 	public void updateDashboard() {
-		SmartDashboard.putData("Intake Lock PID", intakeLockPID);
-		SmartDashboard.putNumber("Intake Lock PID Output", intakeMotor.get());
+		//SmartDashboard.putData("Intake Lock PID", intakeLockPID);
+		//SmartDashboard.putNumber("Intake Lock PID Output", intakeMotor.get());
 		SmartDashboard.putData("Intake motor", intakeMotor);
 		SmartDashboard.putNumber("Shooter Speed", getShooterSpeed());
 		SmartDashboard.putNumber("Intake Speed", getIntakeSpeed());
