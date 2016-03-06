@@ -5,7 +5,6 @@ import robot.RobotMap.ArmLevel;
 import robot.commands.arm.SetArmLevelCommand;
 import robot.commands.auto.base.DriveToDistance;
 import robot.commands.auto.base.DriveToProximity;
-import robot.commands.auto.base.WaitCommand;
 
 public class CrossPortcullisCommand extends CommandGroup {
 

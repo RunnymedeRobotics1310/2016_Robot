@@ -11,7 +11,8 @@ public class GoStraightPID {
 	/*
 	 * Angle PID Controller
 	 * 
-	 * The angle PID controller is declared as static so that they can be adjusted in the SmartDashboard
+	 * The angle PID controller is declared as static so that they can be
+	 * adjusted in the SmartDashboard
 	 */
 	private static R_PIDInput anglePIDInput = new R_PIDInput() {
 		@Override
@@ -26,14 +27,14 @@ public class GoStraightPID {
 			pidOutputValue = output;
 		}
 	};
-	
+
 	private static double angleSetpoint = 0.0;
 	private static double pidOutputValue = 0.0;
 
-	//TODO Verify this values are correct
-	private static R_PIDController anglePIDController = 
-			new R_PIDController(8.0, 0.8, 0.0, 1.0, anglePIDInput, anglePIDOutput);
-	
+	// TODO Verify this values are correct
+	private static R_PIDController anglePIDController = new R_PIDController(8.0, 0.8, 0.0, 1.0, anglePIDInput,
+			anglePIDOutput);
+
 	public static void setEnabled(boolean enabled) {
 		if (enabled) {
 			anglePIDController.enable();
@@ -41,15 +42,15 @@ public class GoStraightPID {
 			anglePIDController.reset();
 		}
 	}
-	
+
 	public static boolean isEnabled() {
 		return anglePIDController.isEnabled();
 	}
-	
-	public static double getOutput() { 
+
+	public static double getOutput() {
 		return pidOutputValue;
 	}
-	
+
 	public static void setSetpoint(double setpoint) {
 		angleSetpoint = setpoint;
 	}
@@ -57,10 +58,9 @@ public class GoStraightPID {
 	public static void periodic() {
 		anglePIDController.calculate();
 	}
-	
+
 	public static void updateDashboard() {
-		
-//		SmartDashboard.putData("AnglePID", anglePIDController);
+		SmartDashboard.putData("AnglePID", anglePIDController);
 	}
 
 }
