@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import robot.oi.OI;
 import robot.pids.GoStraightPID;
 import robot.subsystems.ArmSubsystem;
@@ -39,6 +40,8 @@ public class Robot extends IterativeRobot {
 	
 	Command autonomousCommand;
 	
+	private final NetworkTable grip = NetworkTable.getTable("grip");
+	
     public void autonomousInit() {
     	
         autonomousCommand = oi.getAutoCommand();
@@ -55,6 +58,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        for (double area : grip.getNumberArray("targets/area", new double[0])) {
+            System.out.println("Contour area=" + area);
+        }
         Scheduler.getInstance().run();
     	subsystemPeriodic();
     	updateDashboard();
@@ -78,13 +84,14 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	
-        try {
+        // Run GRIP on the RoboRIO
+    	try {
             new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     	
+    	// Create the OI
     	oi = new OI();
 
         // Add all the subsystems to the subsystem list.
