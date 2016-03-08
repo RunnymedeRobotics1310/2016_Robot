@@ -1,28 +1,19 @@
-
 package robot.commands.auto.base;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Robot;
 import robot.pids.GoStraightPID;
 
-public abstract class AutoGoStraightCommand extends Command {
+public class FollowCameraCommand extends Command {
 
-	public enum Direction {
-		FORWARD, BACKWARD;
-	}
+	// TODO Finish this command.
 
 	private double angleSetpoint;
 	private double speedSetpoint;
 
-	public AutoGoStraightCommand(double angle) {
+	public FollowCameraCommand() {
 		requires(Robot.chassisSubsystem);
-		this.angleSetpoint = angle;
-	}
-
-	public void setSpeed(double speed, Direction direction) {
-		double absoluteSpeed = Math.abs(speed);
-		this.speedSetpoint = (direction == Direction.FORWARD) ? absoluteSpeed : -absoluteSpeed;
+		requires(Robot.cameraSubsystem);
 	}
 
 	// Called just before this Command runs the first time
@@ -34,17 +25,10 @@ public abstract class AutoGoStraightCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
 		double speed = speedSetpoint;
 		double leftSpeed;
 		double rightSpeed;
-
-		SmartDashboard.putNumber("Angle setpoint", angleSetpoint);
-		SmartDashboard.putNumber("Angle difference", -Robot.chassisSubsystem.getAngleDifference(angleSetpoint));
-		SmartDashboard.putNumber("AnglePIDOutput", GoStraightPID.getOutput());
-
 		double turn = GoStraightPID.getOutput();
-
 		// Reverse the direction of the turn when going backwards
 		if (speed < 0) {
 			turn = -turn;
@@ -56,7 +40,6 @@ public abstract class AutoGoStraightCommand extends Command {
 			leftSpeed = turn / 4.0;
 			rightSpeed = -turn / 4.0;
 		} else {
-
 			// If the speed is more than zero, then slow down one side of the
 			// robot
 			leftSpeed = (turn < 0) ? speed * (1 + turn) : speed;
@@ -67,13 +50,12 @@ public abstract class AutoGoStraightCommand extends Command {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	@Override
 	protected boolean isFinished() {
 		return false;
 	}
 
 	// Called once after isFinished returns true
-	public void end() {
+	protected void end() {
 		GoStraightPID.setEnabled(false);
 		Robot.chassisSubsystem.setSpeed(0, 0);
 	}
@@ -82,5 +64,4 @@ public abstract class AutoGoStraightCommand extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 	}
-
 }

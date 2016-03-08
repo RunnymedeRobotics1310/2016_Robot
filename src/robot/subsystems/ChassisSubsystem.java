@@ -80,7 +80,6 @@ public class ChassisSubsystem extends R_Subsystem {
 	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
-
 		leftMotorPID.setSetpoint(leftSpeed);
 		rightMotorPID.setSetpoint(rightSpeed);
 
@@ -90,9 +89,6 @@ public class ChassisSubsystem extends R_Subsystem {
 		if (!rightMotorPID.isEnabled()) {
 			rightMotorPID.enable();
 		}
-
-		// leftMotor.set(leftSpeed);
-		// rightMotor.set(rightSpeed);
 	}
 
 	public double getCurrentAngle() {

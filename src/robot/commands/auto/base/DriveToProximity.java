@@ -19,7 +19,6 @@ public class DriveToProximity extends AutoGoStraightCommand {
 
 	@Override
 	protected boolean isFinished() {
-		//TODO: Make another method to get only the left or right proximity instead of all three
 		return Robot.chassisSubsystem.getProximity();
 	}
 	

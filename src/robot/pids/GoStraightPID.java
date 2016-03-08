@@ -62,5 +62,4 @@ public class GoStraightPID {
 	public static void updateDashboard() {
 		SmartDashboard.putData("AnglePID", anglePIDController);
 	}
-
 }

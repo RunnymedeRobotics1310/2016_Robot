@@ -37,120 +37,116 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	public static List<R_Subsystem> subsystemList = new ArrayList<R_Subsystem>();
-	
-	Command autonomousCommand;
-	
+
+	private Command autonomousCommand;
+
 	private final NetworkTable grip = NetworkTable.getTable("grip");
-	
-    public void autonomousInit() {
-    	
-        autonomousCommand = oi.getAutoCommand();
-        
-        chassisSubsystem.resetGyroHeading();
-        
-        // schedule the autonomous command
-        Scheduler.getInstance().add(autonomousCommand);
-        
-        updateDashboard();
-    }
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        for (double area : grip.getNumberArray("targets/area", new double[0])) {
-            System.out.println("Contour area=" + area);
-        }
-        Scheduler.getInstance().run();
-    	subsystemPeriodic();
-    	updateDashboard();
-    }
-	
-	/**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
-    	updateDashboard();
-    }
-
-    public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-    	updateDashboard();
+	public void autonomousInit() {
+		autonomousCommand = oi.getAutoCommand();
+		chassisSubsystem.resetGyroHeading();
+		// schedule the autonomous command
+		Scheduler.getInstance().add(autonomousCommand);
+		updateDashboard();
 	}
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
-        // Run GRIP on the RoboRIO
-    	try {
-            new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    	
-    	// Create the OI
-    	oi = new OI();
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		for (double area : grip.getNumberArray("targets/area", new double[0])) {
+			System.out.println("Contour area=" + area);
+		}
+		Scheduler.getInstance().run();
+		subsystemPeriodic();
+		updateDashboard();
+	}
 
-        // Add all the subsystems to the subsystem list.
-        subsystemList.add(chassisSubsystem);
-        subsystemList.add(shooterSubsystem);
-        subsystemList.add(cameraSubsystem);
-        subsystemList.add(armSubsystem);
-        
-        for (R_Subsystem s: subsystemList) {
-        	s.init();
-        }
+	/**
+	 * This function is called when the disabled button is hit. You can use it
+	 * to reset subsystems before shutting down.
+	 */
+	public void disabledInit() {
+		updateDashboard();
+	}
 
-        updateDashboard();
-    }
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+		updateDashboard();
+	}
 
-    public void teleopInit() {
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
+		// Run GRIP on the RoboRIO
+		try {
+			new ProcessBuilder("/home/lvuser/grip").inheritIO().start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Create the OI
+		oi = new OI();
+		// Add all the subsystems to the subsystem list.
+		subsystemList.add(chassisSubsystem);
+		subsystemList.add(shooterSubsystem);
+		subsystemList.add(cameraSubsystem);
+		subsystemList.add(armSubsystem);
+
+		for (R_Subsystem s : subsystemList) {
+			s.init();
+		}
+
+		updateDashboard();
+	}
+
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
-        updateDashboard();
-    }
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null)
+			autonomousCommand.cancel();
+		updateDashboard();
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    	subsystemPeriodic();
-    	updateDashboard();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
-    
-    private void subsystemPeriodic() {
-    	// update all subsystem runtime data.
-        for (R_Subsystem r: subsystemList) {
-        	r.periodic();
-        }
-        oi.periodic();
-        
-        GoStraightPID.periodic();
-    }
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		subsystemPeriodic();
+		updateDashboard();
+	}
 
-    private void updateDashboard() {
-    	// update all subsystems and the OI dashboard items.
-        for (R_Subsystem r: subsystemList) {
-        	r.updateDashboard();
-        }
-        oi.updateDashboard();
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 
-        GoStraightPID.updateDashboard();
-        // Put the currently scheduled commands on the dashboard
-        //SmartDashboard.putData("SchedulerCommands", Scheduler.getInstance());
-    }
+	private void subsystemPeriodic() {
+		// update all subsystem runtime data.
+		for (R_Subsystem r : subsystemList) {
+			r.periodic();
+		}
+		oi.periodic();
+
+		GoStraightPID.periodic();
+	}
+
+	private void updateDashboard() {
+		// update all subsystems and the OI dashboard items.
+		for (R_Subsystem r : subsystemList) {
+			r.updateDashboard();
+		}
+		oi.updateDashboard();
+
+		GoStraightPID.updateDashboard();
+		// Put the currently scheduled commands on the dashboard
+		// SmartDashboard.putData("SchedulerCommands", Scheduler.getInstance());
+	}
 }

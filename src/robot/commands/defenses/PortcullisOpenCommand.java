@@ -50,7 +50,6 @@ public class PortcullisOpenCommand extends Command {
 			}
 			return;
 		}
-		
 	}
 
 	@Override
