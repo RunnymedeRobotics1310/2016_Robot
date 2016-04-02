@@ -31,6 +31,7 @@ public class OI {
 		//Operator Controls
 		SHOOT_BOULDER(Button.BUTTON1),
 		WIND_UP_SHOOTER(Button.BUTTON2), 
+		WIND_UP_LOCK(Button.BUTTON3), 
 		CLIMB(Button.BUTTON7),
 		PORTCULLIS_OPEN(Button.BUTTON5),
 		ARM_PID_OVERRIDE(Button.BUTTON6),
@@ -108,6 +109,10 @@ public class OI {
 	
 	public boolean getWindUpShooterButton() {
 		return operatorStick.getButton(ButtonMap.WIND_UP_SHOOTER.getButton());
+	}
+	
+	public boolean getWindUpLockButton() {
+		return operatorStick.getButton(ButtonMap.WIND_UP_LOCK.getButton());
 	}
 	
 	public boolean getShootButton() {
