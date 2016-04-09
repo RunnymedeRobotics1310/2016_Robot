@@ -70,6 +70,7 @@ public class JoystickDriveCommand extends Command {
 		/*double defaultValue = 0;
 		Robot.chassisSubsystem.resetGyroHeading();
 		double angle = Robot.oi.table.getNumber("angle", defaultValue);
+		System.out.println(angle);
 		
 		if(Robot.oi.getAlignShotButton()) {
 			Scheduler.getInstance().add(new PivotToAngleCommand(angle));
@@ -84,6 +85,7 @@ public class JoystickDriveCommand extends Command {
 		double centreCoordinate = centerX - half;
 		double degreePerPixel = 47/width;
 		double angle = centreCoordinate * degreePerPixel;
+		System.out.println(angle);
 		
 		if(Robot.oi.getAlignShotButton()) {
 			Scheduler.getInstance().add(new PivotToAngleCommand(angle));
