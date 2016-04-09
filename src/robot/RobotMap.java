@@ -10,16 +10,26 @@ public class RobotMap {
 
     public final static double ANALOG_OFFSET = 310;
     
+    public static double GROUND_LEVEL_ANGLE = 70.0;
+    public static double LOWER_LIMIT_ANGLE = 95.0;
+    public static double LOW_LEVEL_ANGLE = 100.0;
+    public static double INTAKE_LEVEL_ANGLE = 135.0;
+    public static double PORTCULLIS_LEVEL_ANGLE = 165.0;
+    public static double SHOOT_LEVEL_ANGLE = 225.0;
+    public static double DRIVE_LEVEL_ANGLE = 250.0;
+    public static double BANK_SHOT_LEVEL_ANGLE = 325.0;
+    public static double UPPER_LIMIT_ANGLE = 350.0;
+    
     public enum ArmLevel {
-    	GROUND_LEVEL(70.0),
-    	LOWER_LIMIT(95.0),
-    	LOW_LEVEL(100.0),
-    	INTAKE_LEVEL(135.0),
-    	PORTCULLIS_LEVEL(165.0),
-    	SHOOT_LEVEL(225.0),
-    	DRIVE_LEVEL(250.0),
-    	BANK_SHOT_LEVEL(325.0),
-    	UPPER_LIMIT(350.0);
+    	GROUND_LEVEL(GROUND_LEVEL_ANGLE),
+    	LOWER_LIMIT(LOWER_LIMIT_ANGLE),
+    	LOW_LEVEL(LOW_LEVEL_ANGLE),
+    	INTAKE_LEVEL(INTAKE_LEVEL_ANGLE),
+    	PORTCULLIS_LEVEL(PORTCULLIS_LEVEL_ANGLE),
+    	SHOOT_LEVEL(SHOOT_LEVEL_ANGLE),
+    	DRIVE_LEVEL(DRIVE_LEVEL_ANGLE),
+    	BANK_SHOT_LEVEL(BANK_SHOT_LEVEL_ANGLE),
+    	UPPER_LIMIT(UPPER_LIMIT_ANGLE);
     	
     	public final double angle;
     	

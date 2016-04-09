@@ -1,6 +1,7 @@
 package robot.oi;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.Field.Defense;
 import robot.Field.Goal;
@@ -20,6 +21,20 @@ import robot.utils.R_GameControllerFactory;
 
 public class OI {
 	
+	public NetworkTable table;
+	
+	public OI() {
+		table = NetworkTable.getTable("GRIP/TargetInfo");
+		
+		SmartDashboard.putNumber("Ground level", RobotMap.GROUND_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Lower limit", RobotMap.LOWER_LIMIT_ANGLE);
+		SmartDashboard.putNumber("Low level", RobotMap.LOW_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Intake level", RobotMap.INTAKE_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Portcullis level", RobotMap.PORTCULLIS_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Bank shot level", RobotMap.BANK_SHOT_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Upper limit level", RobotMap.UPPER_LIMIT_ANGLE);
+	}
+	
 	public enum ButtonMap  {
 		//Driver Controls
 		OUTER_INTAKE_BOULDER(Button.LEFT_BUMPER),
@@ -32,6 +47,7 @@ public class OI {
 		SHOOT_BOULDER(Button.BUTTON1),
 		WIND_UP_SHOOTER(Button.BUTTON2),
 		WIND_UP_BANK_SHOT(Button.BUTTON3),
+		SHOT_ALIGN(Button.BUTTON4),
 		//PORTCULLIS_OPEN(Button.BUTTON5),
 		ARM_PID_OVERRIDE(Button.BUTTON6),
 		CLIMB(Button.BUTTON7),
@@ -91,6 +107,10 @@ public class OI {
 	
 	private AutoChooser autoChooser = new AutoChooser();
 
+	public boolean getAlignShotButton() {
+		return operatorStick.getButton(ButtonMap.SHOT_ALIGN.getButton());
+	}
+	
 	public boolean getOuterIntakeBoulderButton() {
 		return driverStick.getButton(ButtonMap.OUTER_INTAKE_BOULDER.getButton());
 	}
@@ -286,8 +306,24 @@ public class OI {
 	 * Put any items on the dashboard
 	 */
 	public void updateDashboard() {
+		RobotMap.GROUND_LEVEL_ANGLE = SmartDashboard.getNumber("Ground level");
+		RobotMap.LOWER_LIMIT_ANGLE = SmartDashboard.getNumber("Lower limit");
+		RobotMap.LOW_LEVEL_ANGLE = SmartDashboard.getNumber("Low level");
+		RobotMap.INTAKE_LEVEL_ANGLE = SmartDashboard.getNumber("Intake level");
+		RobotMap.PORTCULLIS_LEVEL_ANGLE = SmartDashboard.getNumber("Portcullis level");
+		RobotMap.BANK_SHOT_LEVEL_ANGLE = SmartDashboard.getNumber("Bank shot level");
+		RobotMap.UPPER_LIMIT_ANGLE = SmartDashboard.getNumber("Upper limit level");
+		
 		SmartDashboard.putString("Driver Controllers", driverStick.toString());
 		SmartDashboard.putString("Operator Controllers", operatorStick.toString());
+		
+		SmartDashboard.putNumber("Ground level", RobotMap.GROUND_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Lower limit", RobotMap.LOWER_LIMIT_ANGLE);
+		SmartDashboard.putNumber("Low level", RobotMap.LOW_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Intake level", RobotMap.INTAKE_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Portcullis level", RobotMap.PORTCULLIS_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Bank shot level", RobotMap.BANK_SHOT_LEVEL_ANGLE);
+		SmartDashboard.putNumber("Upper limit level", RobotMap.UPPER_LIMIT_ANGLE);
 	}
 	
 }

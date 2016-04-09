@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static final ArmSubsystem armSubsystem = new ArmSubsystem();
 	public static final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 //	public static final CameraSubsystem cameraSubsystem = new CameraSubsystem();
-
+	
 	public static OI oi;
 
 	public static ArrayList<R_Subsystem> subsystemList = new ArrayList<>();

@@ -67,6 +67,29 @@ public class JoystickDriveCommand extends Command {
 			return;
 		}*/
 		 
+		/*double defaultValue = 0;
+		Robot.chassisSubsystem.resetGyroHeading();
+		double angle = Robot.oi.table.getNumber("angle", defaultValue);
+		
+		if(Robot.oi.getAlignShotButton()) {
+			Scheduler.getInstance().add(new PivotToAngleCommand(angle));
+			return;
+		}*/
+		
+		double defaultValue = 0;
+		double width  = Robot.oi.table.getNumber("width", defaultValue);
+		double centerX = Robot.oi.table.getNumber("centerX", defaultValue);
+		
+		double half = width/2;
+		double centreCoordinate = centerX - half;
+		double degreePerPixel = 47/width;
+		double angle = centreCoordinate * degreePerPixel;
+		
+		if(Robot.oi.getAlignShotButton()) {
+			Scheduler.getInstance().add(new PivotToAngleCommand(angle));
+			return;
+		}
+		
 		// Use the driver input to set the speed and direction.
 		if (Math.abs(speed) < 0.03) {
 			leftSpeed  =   turn / 2.0;
