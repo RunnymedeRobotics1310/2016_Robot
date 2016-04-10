@@ -39,7 +39,7 @@ public class AutoDriveAndShootCommand extends CommandGroup {
 
 			double angle;
 
-			angle = (target == Target.LEFT) ? rampAngle : 360 - rampAngle;
+			angle = (target == Target.LEFT) ? rampAngle : 0;
 
 			addSequential(new CrossLowBarCommand());
 
