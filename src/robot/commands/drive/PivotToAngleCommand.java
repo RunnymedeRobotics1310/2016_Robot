@@ -14,7 +14,7 @@ public class PivotToAngleCommand extends Command {
 
 	public PivotToAngleCommand(double angle) {
 		requires(Robot.chassisSubsystem);
-		this.angleSetpoint = angle;
+		this.angleSetpoint = Robot.chassisSubsystem.getCurrentAngle() + angle;
 	}
 
 	// Called just before this Command runs the first time
@@ -26,13 +26,18 @@ public class PivotToAngleCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		
 		double leftSpeed;
 		double rightSpeed;
 
+		System.out.println("Setpoint:" + angleSetpoint);
+		System.out.println("Difference:" + -Robot.chassisSubsystem.getAngleDifference(angleSetpoint));
+		System.out.println("PIDOutput:" + PivotPID.getOutput());
+		
+		/*
 		SmartDashboard.putNumber("Angle setpoint", angleSetpoint);
 		SmartDashboard.putNumber("Angle difference", -Robot.chassisSubsystem.getAngleDifference(angleSetpoint));
 		SmartDashboard.putNumber("AnglePIDOutput", PivotPID.getOutput());
+		*/
 
 		double turn = PivotPID.getOutput();
 		
@@ -49,6 +54,7 @@ public class PivotToAngleCommand extends Command {
 			rightSpeed = -turn;
 		}
 
+		System.out.println("Pivoting");
 		Robot.chassisSubsystem.setSpeed(leftSpeed, rightSpeed);
 	}
 

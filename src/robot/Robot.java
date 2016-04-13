@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import robot.oi.OI;
 import robot.pids.GoStraightPID;
 import robot.pids.PivotPID;
+import robot.pids.TurnGoStraightPID;
 import robot.subsystems.ArmSubsystem;
 import robot.subsystems.ChassisSubsystem;
 import robot.subsystems.ClimberSubsystem;
@@ -126,6 +127,7 @@ public class Robot extends IterativeRobot {
         
         // Command PID updates
         GoStraightPID.periodic();
+        TurnGoStraightPID.periodic();
         PivotPID.periodic();
     }
 

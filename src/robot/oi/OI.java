@@ -1,3 +1,4 @@
+
 package robot.oi;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,7 +41,7 @@ public class OI {
 		WIND_UP_SHOOTER(Button.BUTTON2),
 		WIND_UP_BANK_SHOT(Button.BUTTON3),
 		SHOT_ALIGN(Button.BUTTON4),
-		//PORTCULLIS_OPEN(Button.BUTTON5),
+		SHOT_NO_LONGER_ALIGN(Button.BUTTON5),
 		ARM_PID_OVERRIDE(Button.BUTTON6),
 		CLIMB(Button.BUTTON7),
 		SCISSOR_RELEASE(Button.BUTTON8),
@@ -99,9 +100,14 @@ public class OI {
 	
 	private AutoChooser autoChooser = new AutoChooser();
 	
+	public boolean getNoLongerAlignShotButton() {
+		return operatorStick.getButton(ButtonMap.SHOT_NO_LONGER_ALIGN.getButton());
+	}
+	
 	public boolean getAlignShotButton() {
 		return operatorStick.getButton(ButtonMap.SHOT_ALIGN.getButton());
 	}
+	
 
 	public boolean getOuterIntakeBoulderButton() {
 		return driverStick.getButton(ButtonMap.OUTER_INTAKE_BOULDER.getButton());
