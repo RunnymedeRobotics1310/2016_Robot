@@ -22,6 +22,7 @@ import robot.utils.R_GameControllerFactory;
 public class OI {
 	
 	public NetworkTable table;
+	public NetworkTableOI networkTableOI = new NetworkTableOI();
 	
 	public OI() {
 		table = NetworkTable.getTable("GRIP/TargetInfo");
