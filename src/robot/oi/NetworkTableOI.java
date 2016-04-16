@@ -35,7 +35,7 @@ public class NetworkTableOI {
 	public void updateDashboard() {
 		
 		SmartDashboard.putString("Network OI", 
-				"windowInput" + getXAngle() + " " + isNewEvent()); 
+				"windowInput " + getXAngle() + " " + isNewEvent()); 
 
 	}
 }
