@@ -1,7 +1,7 @@
 package robot.utils;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.RumbleType;
 
 /**
  * This interface is the interface for all GameControllers. A GameController

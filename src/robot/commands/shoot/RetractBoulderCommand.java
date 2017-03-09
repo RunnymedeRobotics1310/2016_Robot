@@ -67,10 +67,8 @@ public class RetractBoulderCommand extends Command {
 				Robot.shooterSubsystem.setIntakeMotorReverse(IntakeReverseSpeed.LOW);
 				if (armPosition == ARM_FULLY_UP) {
 					System.out.println("Bank Shot Setup");
-					Robot.armSubsystem.setArmAngle(RobotMap.ArmLevel.BANK_SHOT_LEVEL.getAngle());
 					Robot.armSubsystem.startArmIntake();
 				} else {
-					Robot.armSubsystem.setArmAngle(RobotMap.ArmLevel.SHOOT_LEVEL.getAngle());
 				}
 				System.out.println("3");
 				Robot.shooterSubsystem.stopShooterMotor();

@@ -32,7 +32,6 @@ public class PickupBoulderCommand extends Command {
 			} else {
 				Robot.armSubsystem.startArmIntake();
 			}
-			Robot.armSubsystem.setArmAngle(RobotMap.ArmLevel.INTAKE_LEVEL.getAngle());
 		}
 	}
 
@@ -51,7 +50,6 @@ public class PickupBoulderCommand extends Command {
 	protected void end() {
 		Robot.shooterSubsystem.stopIntakeMotor();
 		Robot.armSubsystem.stopArmIntake();
-		Robot.armSubsystem.setArmAngle(RobotMap.ArmLevel.DRIVE_LEVEL.getAngle());
 	}
 
 	// Called when another command which requires one or more of the same

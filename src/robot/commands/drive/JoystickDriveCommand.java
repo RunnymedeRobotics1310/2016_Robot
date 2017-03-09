@@ -33,6 +33,17 @@ public class JoystickDriveCommand extends Command {
 		double turn = Robot.oi.getTurn();
 		double leftSpeed;
 		double rightSpeed;
+		
+		if(Robot.oi.getArmUp()) {
+			Robot.armSubsystem.armUp();
+		}
+		else if(Robot.oi.getArmDown()) {
+			Robot.armSubsystem.armDown();
+		}
+		
+		else {
+			Robot.armSubsystem.armStop();
+		}
 
 		if (Robot.oi.getGyroReset()) {
 			Robot.chassisSubsystem.resetGyroHeading();
@@ -74,11 +85,6 @@ public class JoystickDriveCommand extends Command {
 		 */
 
 		double targetCenterX = Robot.oi.getVisionTargetCenter();
-
-		if (Robot.oi.getAutoAlignShotButton() && targetCenterX != RobotMap.NO_VISION_TARGET) {
-			Scheduler.getInstance().add(new AlignAndShootHighShotCommand(MatchPeriod.TELEOP));
-			return;
-		}
 		
 		if (Robot.oi.getManualAlignShotButton()) {
 			Scheduler.getInstance().add(new AlignAndShootHighShotCommand(MatchPeriod.TELEOP));

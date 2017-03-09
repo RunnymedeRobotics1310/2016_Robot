@@ -35,12 +35,12 @@ public class OI {
 		CANCEL_COMMAND(Button.X),
 		
 		//Operator Controls
+		ARM_UP(Button.BUTTON4),
+		ARM_DOWN(Button.BUTTON6),
 		SHOOT_BOULDER(Button.BUTTON1),
 		WIND_UP_SHOOTER(Button.BUTTON2),
 		WIND_UP_BANK_SHOT(Button.BUTTON3),
-		AUTO_SHOT_ALIGN(Button.BUTTON4),
 		MANUAL_SHOT_ALIGN(Button.BUTTON5),
-		ARM_PID_OVERRIDE(Button.BUTTON6),
 		CLIMB(Button.BUTTON7),
 		SCISSOR_RELEASE(Button.BUTTON8),
 		ROTATE_ARM_PICKUP_POS(Button.BUTTON12),
@@ -97,8 +97,12 @@ public class OI {
 	
 	private AutoChooser autoChooser = new AutoChooser();
 	
-	public boolean getAutoAlignShotButton() {
-		return operatorStick.getButton(ButtonMap.AUTO_SHOT_ALIGN.getButton());
+	public boolean getArmUp() {
+		return operatorStick.getButton(ButtonMap.ARM_UP.getButton());
+	}
+	
+	public boolean getArmDown() {
+		return operatorStick.getButton(ButtonMap.ARM_DOWN.getButton());
 	}
 	
 	public boolean getManualAlignShotButton() {
@@ -170,11 +174,6 @@ public class OI {
 	
 	public double getArmSpeed() {
 		return operatorStick.getAxis(Axis.Y) * operatorStick.getAxis(Axis.Y) * operatorStick.getAxis(Axis.Y);
-	}
-
-	
-	public boolean getArmPIDOverride() {
-		return operatorStick.getButton(ButtonMap.ARM_PID_OVERRIDE.getButton());
 	}
 	
 	public boolean getClimbButton() {

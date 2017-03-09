@@ -43,7 +43,6 @@ public class PortcullisOpenCommand extends Command {
 		 */
 		if (step == Step.ONE) {
 			Robot.chassisSubsystem.setSpeed(BACKUP_SLOWLY_SPEED, BACKUP_SLOWLY_SPEED);
-			Robot.armSubsystem.setArmAngle(startAngle + 110);
 
 			if (Robot.chassisSubsystem.getEncoderDistance() < -1.0) {
 				Robot.chassisSubsystem.setSpeed(0.0, 0.0);

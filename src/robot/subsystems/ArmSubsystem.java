@@ -32,7 +32,7 @@ public class ArmSubsystem extends R_Subsystem {
 		}
 	};
 
-	PIDOutput armPIDOutput = new PIDOutput() {
+	/*PIDOutput armPIDOutput = new PIDOutput() {
 
 		@Override
 		public void pidWrite(double speed) {
@@ -42,7 +42,7 @@ public class ArmSubsystem extends R_Subsystem {
 		}
 	};
 	
-	R_PIDController armPID = new R_PIDController(1.5, 0.0, 0.0, 0.0, armPIDInput, armPIDOutput);
+	R_PIDController armPID = new R_PIDController(1.5, 0.0, 0.0, 0.0, armPIDInput, armPIDOutput);*/
 
 	private boolean armDeployed = false;
 
@@ -62,7 +62,7 @@ public class ArmSubsystem extends R_Subsystem {
 		if (!getArmUpperLimit()) {
 			armEncoder.setEncoderAngle(RobotMap.ArmLevel.UPPER_LIMIT.angle);
 		}
-		armPID.calculate();
+		//armPID.calculate();
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class ArmSubsystem extends R_Subsystem {
 		armEncoder.reset();
 	}
 
-	public void setArmAngle(double armAngle) {
+	/*public void setArmAngle(double armAngle) {
 		// Set the arm to the appropriate angle and hold with a PID.
 		armPID.setSetpoint((armAngle-RobotMap.ArmLevel.LOWER_LIMIT.getAngle()) /
 				(RobotMap.ArmLevel.UPPER_LIMIT.getAngle()-RobotMap.ArmLevel.LOWER_LIMIT.getAngle()));
@@ -130,7 +130,7 @@ public class ArmSubsystem extends R_Subsystem {
 
 	public void disableArmPID() {
 		armPID.disable();
-	}
+	}*/
 
 	/**
 	 * 
@@ -139,6 +139,18 @@ public class ArmSubsystem extends R_Subsystem {
 	 */
 	public void setArmSpeed(double armSpeed) {
 		armDeployMotor.set(armSpeed);
+	}
+	
+	public void armUp() {
+			setArmSpeed(0.3);
+	}
+	
+	public void armDown() {
+			setArmSpeed(-0.3);
+	}
+	
+	public void armStop() {
+		setArmSpeed(0);
 	}
 
 	@Override
@@ -151,6 +163,6 @@ public class ArmSubsystem extends R_Subsystem {
 		SmartDashboard.putNumber("Arm Encoder Angle", armEncoder.getAngle());
 		SmartDashboard.putBoolean("Arm Max Limit Switch", armUpperLimitSwitch.get());
 		SmartDashboard.putBoolean("Arm Min Limit Switch", armLowerLimitSwitch.get());
-		SmartDashboard.putData("Arm PID", armPID);
+		//SmartDashboard.putData("Arm PID", armPID);
 	}
 }
